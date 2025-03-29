@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Services</title>
+    <style>
+        /* Emergency Section Styling */
+        #emergency-call {
+            background-color: #ffebee;
+            padding: 40px 0;
+            border-top: 3px solid #f44336;
+            border-bottom: 3px solid #f44336;
+        }
+        
+        .emergency-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        #emergency-call h2 {
+            color: #f44336;
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+        }
+        
+        #emergency-call p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .emergency-btn {
+            background-color: #f44336;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(244, 67, 54, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .emergency-btn:hover {
+            background-color: #d32f2f;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(244, 67, 54, 0.4);
+        }
+        
+        .emergency-btn:active {
+            transform: translateY(0);
+        }
+        
+        .status-message {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .success {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #a5d6a7;
+        }
+        
+        .loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(0,0,0,0.1);
+            border-radius: 50%;
+            border-top-color: #f44336;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .doctor-notification {
+            background-color: #e3f2fd;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            text-align: left;
+            display: none;
+        }
+        
+        .doctor-list {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+        
+        .doctor-list li {
+            padding: 10px;
+            border-bottom: 1px solid #bbdefb;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+    <section id="emergency-call" class="emergency-call">
+        <div class="emergency-container">
+            <h2>Emergency Contact</h2>
+            <p>Call for immediate medical assistance</p>
+            
+            <button id="emergencyBtn" class="emergency-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+                </svg>
+                EMERGENCY CALL (112)
+            </button>
+            
+            <div id="statusMessage" class="status-message"></div>
+            
+            <div id="doctorNotification" class="doctor-notification">
+                <h3>Nearby Doctors Notified</h3>
+                <p>The following doctors have been alerted and are responding:</p>
+                <ul id="doctorList" class="doctor-list">
+                    <!-- Doctors will be added here by JavaScript -->
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        document.getElementById('emergencyBtn').addEventListener('click', function() {
+            const btn = this;
+            const statusMessage = document.getElementById('statusMessage');
+            const doctorNotification = document.getElementById('doctorNotification');
+            
+            // Show loading state
+            btn.disabled = true;
+            btn.innerHTML = `<span class="spinner"></span> CONNECTING TO EMERGENCY...`;
+            statusMessage.style.display = 'block';
+            statusMessage.className = 'status-message loading';
+            statusMessage.innerHTML = 'Connecting to emergency services...';
+            
+            // Simulate API call to emergency services
+            setTimeout(function() {
+                // First response - ambulance dispatched
+                statusMessage.className = 'status-message success';
+                statusMessage.innerHTML = '✓ Ambulance has been dispatched to your location!';
+                
+                // Enable button again
+                btn.disabled = false;
+                btn.innerHTML = `✓ EMERGENCY CALL COMPLETE`;
+                
+                // Simulate notifying nearby doctors (after 2 seconds)
+                setTimeout(function() {
+                    notifyNearbyDoctors();
+                }, 2000);
+                
+            }, 3000);
+        });
+        
+        function notifyNearbyDoctors() {
+            const doctorNotification = document.getElementById('doctorNotification');
+            const doctorList = document.getElementById('doctorList');
+            
+            // Sample doctor data (in real app this would come from an API)
+            const nearbyDoctors = [
+                { name: "Dr. Sarah Johnson", specialty: "Emergency Medicine", distance: "0.8 miles", status: "Responding" },
+                { name: "Dr. Michael Chen", specialty: "Cardiology", distance: "1.2 miles", status: "En route" },
+                { name: "Dr. Priya Patel", specialty: "General Physician", distance: "0.5 miles", status: "Preparing" }
+            ];
+            
+            // Clear previous list
+            doctorList.innerHTML = '';
+            
+            // Add doctors to the list
+            nearbyDoctors.forEach(doctor => {
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div>
+                        <strong>${doctor.name}</strong><br>
+                        <small>${doctor.specialty} (${doctor.distance})</small>
+                    </div>
+                    <span>${doctor.status}</span>
+                `;
+                doctorList.appendChild(li);
+            });
+            
+            // Show the notification
+            doctorNotification.style.display = 'block';
+            
+            // In a real application, you would:
+            // 1. Get user's location (GPS)
+            // 2. Send emergency request to your backend
+            // 3. Backend would:
+            //    - Contact ambulance services via API (like Twilio for SMS/calls)
+            //    - Query database for nearby doctors
+            //    - Send notifications to doctors (SMS/email/app notification)
+            //    - Return response to frontend
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+/* Reset some default styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Full-screen background with gradient */
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Login container with improved design */
+.login-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    transition: transform 0.3s ease-in-out;
+}
+.form-box {
+    width: 100%;
+    max-width: 450px;
+    padding: 30px;
+    background: #ca6b6b;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(185, 83, 83, 0.1);
+    display: none;
+}
+.form-box.active {
+    display: block;
+}
+/* Heading styles */
+h2 {
+    color: #333;
+    margin-bottom: 25px;
+    font-size: 26px;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    background: fixed;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Form container */
+.form-container {
+    width: 100%;
+}
+
+/* Style for form labels */
+.input-container {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+/* Label styling */
+label {
+    display: block;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Input field styling */
+input {
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+    margin-top: 8px;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #2575fc;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Button styling */
+button {
+    width: 100%;
+    padding: 15px;
+    background-color: #2575fc;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #6a11cb;
+}
+
+/* Forgot password & Sign up link */
+p {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #555;
+}
+
+a {
+    color: #2575fc;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive design for mobile screens */
+@media (max-width: 480px) {
+    .login-container {
+        padding: 20px;
+        max-width: 95%;
+    }
+    
+    h2 {
+        font-size: 24px;
+    }
+
+    input, button {
+        font-size: 14px;
+        padding: 12px;
+    }
+}
